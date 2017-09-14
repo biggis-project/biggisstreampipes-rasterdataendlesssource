@@ -43,7 +43,7 @@ object Main {
     }
   }
 
-  val kafkaTopic = config.getStringOrDefault("kafka.topic", "org.streampipes.biggis.rasterdata.demo-source-endless-geotiff")
+  val kafkaTopic = config.getStringOrDefault("kafka.topic", "org.streampipes.biggis.rasterdata.demo-source.endless-geotiff")
   val interval = config.getStringOrDefault("source.interval", "5").toInt
 
   def main(args: Array[String]) = {
@@ -55,6 +55,8 @@ object Main {
     }
 
     val messages = buildMessages(allFiles.get)
+
+    println("Serving " + messages.size + " files")
 
     var i = 0
     while (true) {
